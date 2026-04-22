@@ -3,7 +3,7 @@ controller_manager:
     update_rate: 50
 
     joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcasters
+      type: joint_state_broadcaster/JointStateBroadcaster
 
     spacenav_controller:
       type: needle_controllers/SpacenavTeleopController
@@ -15,7 +15,7 @@ controller_manager:
       type: velocity_controllers/JointGroupVelocityController
 
     real_velocity_controller:
-      type: velocity_controllers/JointGroupVelocityController
+      type: forward_command_controller/ForwardCommandController
 
     position_controller:
       type: position_controllers/JointGroupPositionController
