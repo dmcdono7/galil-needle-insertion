@@ -103,13 +103,6 @@ def generate_launch_description():
             description="Launch Gazebo",
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_fake_hardware",
-            default_value="false",
-            description="Use Fake Hardware",
-        )
-    )
 
 
     # Initialize Arguments
@@ -130,7 +123,6 @@ def generate_launch_description():
     gui = LaunchConfiguration("gui")
     name = LaunchConfiguration("name")
     use_simulation = LaunchConfiguration("use_simulation")
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
     # Get URDF via xacro
     robot_description_content = Command(
