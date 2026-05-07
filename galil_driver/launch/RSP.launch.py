@@ -3,7 +3,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, RegisterEventHandler,IncludeLaunchDescription, AppendEnvironmentVariable
 from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, PythonExpression
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -150,8 +150,17 @@ def generate_launch_description():
     )
     robot_description = {"robot_description": robot_description_content}
 
+    # Conditionally select controllers file: use _sim version for simulation
     initial_joint_controllers = PathJoinSubstitution(
-        [FindPackageShare(runtime_config_package), "config", controllers_file]
+        [
+            FindPackageShare(runtime_config_package),
+            "config",
+            PythonExpression([
+                "'galil_controllers_sim.yaml' if '",
+                use_simulation,
+                "' == 'true' else 'galil_controllers.yaml'"
+            ]),
+        ]
     )
 
     ignition_launch_description = IncludeLaunchDescription(
@@ -191,7 +200,7 @@ def generate_launch_description():
             ParameterFile(initial_joint_controllers, allow_substs=True),
         ],
         output="both",
-        condition=UnlessCondition(use_simulation)
+        condition=UnlessCondition(use_simulation),
     )
 
     # Get RViz config
@@ -228,7 +237,7 @@ def generate_launch_description():
             package="controller_manager",
             executable="spawner",
             arguments=["real_velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
-            condition=UnlessCondition(use_simulation)
+            condition=IfCondition(use_simulation)
         )
     )
 
@@ -237,7 +246,7 @@ def generate_launch_description():
             package="controller_manager",
             executable="spawner",
             arguments=["velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
-            condition=IfCondition(use_simulation)
+            condition=UnlessCondition(use_simulation)
         )
     )
 

@@ -40,14 +40,14 @@ controller_interface::CallbackReturn SineRealVelocityController::on_init()
   auto_declare<std::vector<std::string>>("joints", {});
   auto_declare<std::string>("interface_name", "velocity");
   auto_declare<int>("joint_index", 0);
-  auto_declare<double>("amplitude", 1000.0);
+  auto_declare<double>("amplitude", 0.001);
   auto_declare<double>("frequency", 0.05);
   auto_declare<double>("offset", 0.0);
   auto_declare<double>("phase", 0.0);
   auto_declare<double>("duration", 0.0);
 
   joint_index_ = 0;
-  amplitude_ = 0.0;
+  amplitude_ = 0.001;
   frequency_ = 0.0;
   offset_ = 0.0;
   phase_ = 0.0;
