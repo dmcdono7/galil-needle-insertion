@@ -31,7 +31,12 @@
         <xacro:unless value="$(arg use_simulation)">
           <command_interface name="real_velocity"/>
         </xacro:unless>
-	<param name="gear_ratio">1.0</param>
+        <xacro:if value="$(arg use_simulation)">
+          <param name="gear_ratio">1.0</param>
+        </xacro:if>
+        <xacro:unless value="$(arg use_simulation)">
+          <param name="gear_ratio">1000000.0</param>
+        </xacro:unless>
         <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">100</param>
         <param name="real_velocity_ki">0</param>
@@ -58,7 +63,12 @@
         <xacro:unless value="$(arg use_simulation)">
           <command_interface name="real_velocity"/>
         </xacro:unless>
-        <param name="gear_ratio">1.0</param>
+        <xacro:if value="$(arg use_simulation)">
+          <param name="gear_ratio">1.0</param>
+        </xacro:if>
+        <xacro:unless value="$(arg use_simulation)">
+          <param name="gear_ratio">1000000.0</param>
+        </xacro:unless>
         <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">100</param>
         <param name="real_velocity_ki">0</param>
@@ -85,7 +95,12 @@
         <xacro:unless value="$(arg use_simulation)">
           <command_interface name="real_velocity"/>
         </xacro:unless>
-        <param name="gear_ratio">1.0</param>
+        <xacro:if value="$(arg use_simulation)">
+          <param name="gear_ratio">1.0</param>
+        </xacro:if>
+        <xacro:unless value="$(arg use_simulation)">
+          <param name="gear_ratio">1000000.0</param>
+        </xacro:unless>
         <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">100</param>
         <param name="real_velocity_ki">0</param>
@@ -112,7 +127,12 @@
         <xacro:unless value="$(arg use_simulation)">
           <command_interface name="real_velocity"/>
         </xacro:unless>
-        <param name="gear_ratio">1.0</param>
+        <xacro:if value="$(arg use_simulation)">
+          <param name="gear_ratio">1.0</param>
+        </xacro:if>
+        <xacro:unless value="$(arg use_simulation)">
+          <param name="gear_ratio">7880000.0</param>
+        </xacro:unless>
         <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">35</param>
         <param name="real_velocity_ki">0</param>
