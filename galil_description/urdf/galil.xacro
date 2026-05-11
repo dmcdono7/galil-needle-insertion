@@ -5,16 +5,16 @@
 
     <link name="base_link">
       <visual>
-        <origin xyz="0 0 -0.025" rpy="0 0 ${-pi/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://galil_description/meshes/base_link.stl"/>
+          <box size="0.152 0.152 0.030"/>
         </geometry>
         <material name="silver"/>
       </visual>
       <collision>
         <origin xyz="0 0 -0.025" rpy="0 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://galil_description/meshes/base_link.stl"/>
+          <box size="0.152 0.152 0.030"/>
         </geometry>
         <material name="silver"/>
       </collision>
@@ -25,44 +25,21 @@
       </inertial>
     </link>
     
-    <link name="vertical_link">
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
-        <geometry>
-          <mesh filename="package://galil_description/meshes/vertical_link.stl"/>
-        </geometry>
-        <material name="silver"/>
-      </visual>
-      <inertial>
-        <mass value="1.0"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-      </inertial>
-    </link>
-    
+    <!--axis A changes x-->
     <link name="horizontal_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
-        <geometry>
-          <mesh filename="package://galil_description/meshes/horizontal_link.stl"/>
-        </geometry>
-        <material name="silver"/>
-      </visual>
-      <inertial>
-        <mass value="1.0"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-      </inertial>
-    </link>
-
-    <link name="needle_link">
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
         <geometry>
-          <mesh filename="package://galil_description/meshes/needle_link.stl"/>
+          <box size="0.152 0.152 0.03"/>
         </geometry>
         <material name="silver"/>
       </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.22 0.18 0.03"/>
+        </geometry>
+      </collision>
       <inertial>
         <mass value="1.0"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -70,50 +47,114 @@
       </inertial>
     </link>
     
-    <link name="needle_drive_link">
+    <!-- axis B changes y-->
+    <link name="needle_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.02 0.02 0.02"/>
+          <box size="0.152 0.152 0.055"/>
         </geometry>
         <material name="silver"/>
       </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.152 0.152 0.055"/>
+        </geometry>
+      </collision>
       <inertial>
         <mass value="1.0"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
       </inertial>
     </link>
+    
+    <!--axis C inserts needle-->
+    <link name="needle_drive_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.26 0.02 0.063"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <visual>
+        <origin xyz="-0.1 0 0" rpy="0 1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.003" length="0.20"/>
+        </geometry>
+        <material name="light_grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.26 0.02 0.063"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="-0.1 0 0" rpy="0 1.5708 0"/>
+        <geometry>
+          <cylinder radius="0.003" length="0.20"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
+    </link>
+    
+    <!-- axis D changes z-->
+    <link name="vertical_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.09 0.102 0.152"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>   
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.18 0.03 0.03"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
+    </link>
+    
+    <joint name="horizontal_joint" type="prismatic">
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="horizontal_link"/>
+      <axis xyz="0 -1 0.0"/>
+      <limit upper="0.03" lower="-0.03" effort="100" velocity="100"/>
+    </joint>
+    
+    <joint name="insertion_joint" type="prismatic">
+      <origin xyz="0 0 0.041" rpy="0 0 0"/>
+      <parent link="horizontal_link"/>
+      <child link="needle_link"/>
+      <axis xyz="-1 0 0"/>
+      <limit upper="0.1" lower="0.0" effort="100" velocity="100"/>
+    </joint>
 
     <joint name="vertical_joint" type="prismatic">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <parent link="base_link"/>
+      <origin xyz="0 0 0.13" rpy="0 0 0"/>
+      <parent link="needle_link"/>
       <child link="vertical_link"/>
       <axis xyz="0.0 0.0 1.0"/>
       <limit upper="0.025" lower="-0.025" effort="100" velocity="100"/>
     </joint>
 
-    <joint name="horizontal_joint" type="prismatic">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <parent link="vertical_link"/>
-      <child link="horizontal_link"/>
-      <axis xyz="1.0 0.0 0.0"/>
-      <limit upper="0.03" lower="-0.03" effort="100" velocity="100"/>
-    </joint>
-    
-    <joint name="insertion_joint" type="prismatic">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <parent link="horizontal_link"/>
-      <child link="needle_link"/>
-      <axis xyz="0.0 1.0 0.0"/>
-      <limit upper="0.1" lower="0.0" effort="100" velocity="100"/>
-    </joint>
-    
     <joint name="needle_drive_joint" type="prismatic">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <parent link="horizontal_link"/>
+      <origin xyz="0 -0.06 0" rpy="0 0 0"/>
+      <parent link="vertical_link"/>
       <child link="needle_drive_link"/>
-      <axis xyz="0.0 1.0 0.0"/>
+      <axis xyz="-1 0 0.0"/>
       <limit upper="0.1" lower="0.0" effort="100" velocity="100"/>
     </joint>
 
