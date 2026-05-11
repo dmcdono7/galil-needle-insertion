@@ -673,7 +673,7 @@ namespace galil_driver {
 								      const rclcpp::Duration& /*period*/){
     
    //https://www.galil.com/sw/pub/all/doc/gclib/html/unionGDataRecord.html seems extremely useful to be in this structure
-   union GDataRecord record;
+   /*union GDataRecord record;
 
    if(GRecord(connection, &record, G_QR) == G_NO_ERROR) {
        for(std::size_t i=0; i<info_.joints.size();i++) {
@@ -716,12 +716,12 @@ namespace galil_driver {
        RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"),"Failed to read Galil record");
        return hardware_interface::return_type::ERROR;
    }
-   
+   */
 
 
    //RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Reading...");
 
-   /* GSize BUFFER_LENGTH=1024;
+    GSize BUFFER_LENGTH=1024;
     GSize bytes_returned;
     char buffer[1024];
     if( GCommand(connection, "TP", buffer, BUFFER_LENGTH, &bytes_returned ) == G_NO_ERROR ){
@@ -766,7 +766,7 @@ namespace galil_driver {
     else{
       RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "Failed to send TT command to Galil.");
       return hardware_interface::return_type::ERROR;
-    }*/
+    }
 
     
 
