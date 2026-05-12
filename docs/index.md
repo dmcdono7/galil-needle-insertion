@@ -1,6 +1,9 @@
 # Galil ROS 2 Documentation
 
-Welcome to the documentation for the Galil ROS 2 Test Repo.
+EN.530.707 Robot System Programming Final Project
+Team members: Daniel Wang, Kayleigh Huk, Douglas McDonough
+
+Welcome to the documentation for the Galil ROS 2 Needle Insertion Robot Project.
 
 ```{toctree}
 :maxdepth: 2
