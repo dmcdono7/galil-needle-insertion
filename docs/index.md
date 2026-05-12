@@ -9,3 +9,7 @@ Welcome to the documentation for the Galil ROS 2 Test Repo.
 getting_started
 real_velocity_prerequisite
 launch_files
+gazebo_simulation
+inspection_commands
+joint_order
+
