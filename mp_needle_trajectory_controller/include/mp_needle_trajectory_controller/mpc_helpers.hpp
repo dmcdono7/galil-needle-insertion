@@ -28,7 +28,7 @@ public:
   MpcHelpers(float limit, double ins_step);
   void set_target_pose(std::vector<double> target_vec);
   static double obj_wrapper(const std::vector<double> &x, std::vector<double>& /*grad*/, void* data);
-  double objective(const std::vector<double>& uhat, std::vector<double>& /*grad*/, void */*data*/);
+  double objective(const std::vector<double>& uhat, std::vector<double>& /*grad*/, void *data);
   std::vector<double> get_mpc_command(float H, double step_depth, int step, std::vector<double> tip_vec, std::vector<double> stages_vec, int test);
 
 };

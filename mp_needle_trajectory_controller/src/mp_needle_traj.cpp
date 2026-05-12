@@ -129,9 +129,9 @@ controller_interface::InterfaceConfiguration MpNeedleTrajectoryController::state
 void MpNeedleTrajectoryController::needleTipCallback(const geometry_msgs::msg::PoseStamped::SharedPtr needle_tip){
   if(active_){
     // position
-    needle_tip_pose[0] = needle_tip->pose.position.x;
-    needle_tip_pose[1] = needle_tip->pose.position.y;
-    needle_tip_pose[2] = needle_tip->pose.position.z;
+    needle_tip_pose[0] = needle_tip->pose.position.x*1e-3;
+    needle_tip_pose[1] = needle_tip->pose.position.y*1e-3;
+    needle_tip_pose[2] = needle_tip->pose.position.z*1e-3;
     
     // get x and z angles
     tf2::Quaternion tip;
@@ -153,11 +153,11 @@ void MpNeedleTrajectoryController::targetCallback(const geometry_msgs::msg::Poin
   if(active_ && !target_set_){
     
     // set the target point
-    target_point[0] = target->point.x;
-    target_point[1] = target->point.y;
-    target_point[2] = target->point.z;
+    target_point[0] = target->point.x*1e-3;
+    target_point[1] = target->point.y*1e-3;
+    target_point[2] = target->point.z*1e-3;
     
-    insertion_length = target->point.x;
+    insertion_length = target->point.x*1e-3;
     ns = std::floor(insertion_length / insertion_step);
         
     mpc.set_target_pose(target_point);
@@ -172,6 +172,14 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
   
   float H = std::fmin(horizon, ns - step);
   
+  if (H < 0) {
+  
+    target_set_ = false;
+    tip_set_ = false;
+    
+    
+  }
+
   float step_depth = insertion_step*step;
   
   if (target_set_ && tip_set_) {
@@ -189,11 +197,10 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
   
   for(int i=0; i<static_cast<int>(joint_names_.size()); ++i){
       stages[i] = joint_state_handles_[i].get().get_value();
+      std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
   }
   
   depth = stages[3];
-  
-  std::cout << step << std::endl;
   
   return controller_interface::return_type::OK;
   

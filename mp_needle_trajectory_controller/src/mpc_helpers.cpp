@@ -119,7 +119,7 @@ double MpcHelpers::objective(const std::vector<double>& uhat, std::vector<double
 
 double MpcHelpers::obj_wrapper(const std::vector<double> &x, std::vector<double> &grad, void* data) {
   MpcHelpers* obj = static_cast<MpcHelpers*>(data);
-  return obj->objective(x, grad, NULL);
+  return obj->objective(x, grad, data);
 }
 
 std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int step, std::vector<double> tip_vec, std::vector<double> stages_vec, int test) {
@@ -136,10 +136,10 @@ std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int 
   
   if (step == 0) {
   
-    cmd[0] = 0.01;
+    cmd[0] = 0;
     cmd[1] = 0;
     cmd[2] = 0;
-    cmd[3] = 0.01; // x axis which controls insertion
+    cmd[3] = 0.005; // x axis which controls insertion
     
   } else if (H > 0) {
     MpcHelpers::update_jacobian();
@@ -150,7 +150,7 @@ std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int 
       uhat.push_back(prev_cmd[2]); // z axis
       
     }
-    
+
     int vars = static_cast<int>(H*2);
     
     nlopt::opt opt(nlopt::LN_COBYLA, vars);
@@ -205,8 +205,8 @@ std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int 
       cmd[3] = std::fmin(target(0), step_depth);
     } else {
       cmd[0] = 0;
-      cmd[1] = stages[1];
-      cmd[2] = stages[2];
+      cmd[1] = 0;
+      cmd[2] = 0;
       cmd[3] = std::fmin(target(0), step_depth);
     }
             

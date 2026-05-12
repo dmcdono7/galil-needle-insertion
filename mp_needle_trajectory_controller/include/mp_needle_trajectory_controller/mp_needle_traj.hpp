@@ -60,12 +60,12 @@ protected:
   std::vector<double> stages;
   
   // hard-coded values for MPC
-  double insertion_step = 5.0;
+  double insertion_step = 0.005;
   float insertion_length;
   float ns;
-  float horizon = 5.0;
+  float horizon = 3.0;
   float depth = 0;
-  float limit = 0.5;
+  float limit = 0.02;
   
   MpcHelpers mpc = MpcHelpers(limit, insertion_step);
   
