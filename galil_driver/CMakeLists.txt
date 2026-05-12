@@ -16,6 +16,7 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(mp_needle_trajectory_controller REQUIRED)
 
 include_directories(include)
 set(THIS_PACKAGE_INCLUDE_DEPENDS

@@ -16,6 +16,18 @@ controller_manager:
 
     position_controller:
       type: position_controllers/JointGroupPositionController
+      
+    mpc_controller:
+      type: mp_needle_trajectory_controller/MpNeedleTrajectoryController
+      
+mpc_controller:
+  ros__parameters:
+    joints:
+      - insertion_joint
+      - horizontal_joint
+      - vertical_joint
+      - needle_drive_joint
+    interface_name: position
 
 velocity_controller:
   ros__parameters:

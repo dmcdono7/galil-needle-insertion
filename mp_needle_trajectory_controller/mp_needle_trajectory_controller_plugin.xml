@@ -1,0 +1,9 @@
+<library path="mp_needle_trajectory_controller">
+  <class name="mp_needle_trajectory_controller/MpNeedleTrajectoryController"
+	 type="MpNeedleTrajectoryController"
+	 base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Model predictive control using needle tip location from FBG sensors.
+    </description>
+  </class>
+</library>
