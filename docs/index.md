@@ -6,4 +6,4 @@ Welcome to the documentation for the Galil ROS 2 Test Repo.
 :maxdepth: 2
 :caption: Contents:
 
-gettings_started
+getting_started
