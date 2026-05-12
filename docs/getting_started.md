@@ -15,6 +15,9 @@ Galil gclib install instructions:
 Galil Python wrapper docs:
 * https://www.galil.com/sw/pub/all/doc/gclib/html/python.html
 
+Nlopt? :
+* 
+
 ## Build
 
 ```bash
