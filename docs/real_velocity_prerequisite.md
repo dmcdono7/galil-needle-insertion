@@ -1,8 +1,8 @@
-## Real Velocity Prerequisite
+# Real Velocity Prerequisite
 
 Before using any controller that claims `joint/real_velocity`, fill the per-joint Galil init parameters in:
 
-- [galil_description/urdf/galil.ros2_control.xacro]
+- `galil_description/urdf/galil.ros2_control.xacro`
 
 Required params per joint:
 
@@ -11,4 +11,4 @@ Required params per joint:
 - `real_velocity_kd`: Kd param
 - `real_velocity_it`: filter (1=no filter, smaller = smoother but less sensitive)
 - `real_velocity_ac`: max acceleration
-- `real_velocity_dc`: max decceleration
+- `real_velocity_dc`: max deceleration
