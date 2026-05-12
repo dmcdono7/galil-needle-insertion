@@ -1,4 +1,4 @@
-## Inspection Commands:
+## Inspection Commands
 
 ```bash
 ros2 control list_controllers

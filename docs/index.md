@@ -12,4 +12,9 @@ launch_files
 gazebo_simulation
 inspection_commands
 joint_order
+hardware_interfaces
+position_control
+simons_estimated_velocity_control
+real_velocity_controller
+sine_test_controller
 
