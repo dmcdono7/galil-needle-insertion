@@ -24,7 +24,7 @@ Edit:
 
 - [galil_driver/config/galil_controllers.yaml]
 
-Meaning:
+Explanation:
 
 - `joint_index`: which single joint gets the sine command
 - `amplitude`: peak velocity
@@ -34,6 +34,8 @@ Meaning:
 - `duration`: seconds before the controller outputs zero and holds; `0.0` means run forever
 
 ### Use PlotJuggler
+
+A very useful tool for visualizing the data:
 
 ```bash
 ros2 run plotjuggler plotjuggler
