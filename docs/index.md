@@ -7,3 +7,4 @@ Welcome to the documentation for the Galil ROS 2 Test Repo.
 :caption: Contents:
 
 getting_started
+real_velocity_prerequisite
